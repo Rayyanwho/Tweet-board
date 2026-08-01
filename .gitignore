@@ -1,44 +1,19 @@
 # Python
-__pycache__/
+**/__pycache__/
 *.py[cod]
-*$py.class
 
-# Virtual Environment
+# Virtual environments
 venv/
-env/
 .venv/
+env/
 
 # Django
-db.sqlite3
-*.sqlite3
+chaiheadq/db.sqlite3
+chaiheadq/media/
 
-# Media uploads
-media/
+# IDEs
+.vscode/
+.idea/
 
 # Environment variables
 .env
-
-# VS Code
-.vscode/
-
-# PyCharm
-.idea/
-
-# macOS
-.DS_Store
-
-# Windows
-Thumbs.db
-
-# Python packaging
-*.egg-info/
-dist/
-build/
-
-# Logs
-*.log
-
-# Cache
-.pytest_cache/
-.mypy_cache/
-
