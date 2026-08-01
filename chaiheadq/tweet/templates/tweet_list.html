@@ -1,0 +1,271 @@
+
+<style>
+    /*=========================
+        BODY
+==========================*/
+
+body{
+    margin:0;
+    background:#e6ebf2;
+    font-family:'Poppins',sans-serif;
+}
+
+/*=========================
+        TITLE
+==========================*/
+
+.page-title{``````
+    text-align:center;
+    margin:50px 0;
+}
+
+.page-title h1{
+    font-size:42px;
+    color:#4d5666;
+    margin-bottom:8px;
+    font-weight:700;
+}
+
+.page-title p{
+    color:#7b8595;
+    font-size:18px;
+}
+
+/*=========================
+      CREATE BUTTON
+==========================*/
+
+.create-btn{
+    display:flex;
+    justify-content:center;
+    margin-bottom:45px;
+}
+
+.neo-btn{
+
+    text-decoration:none;
+    color:#4d5666;
+    font-weight:600;
+    padding:18px 40px;
+    border-radius:18px;
+
+    background:#e6ebf2;
+
+    box-shadow:
+        10px 10px 22px #c6cad0,
+        -10px -10px 22px #ffffff;
+
+    transition:.3s;
+}
+
+.neo-btn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        15px 15px 30px #c2c6cc,
+        -15px -15px 30px #ffffff;
+}
+
+.neo-btn:active{
+
+    box-shadow:
+        inset 8px 8px 15px #c6cad0,
+        inset -8px -8px 15px #ffffff;
+}
+
+/*=========================
+        GRID
+==========================*/
+
+.tweet-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(320px,1fr));
+
+    gap:40px;
+
+    width:90%;
+
+    margin:auto;
+
+    padding-bottom:70px;
+}
+
+/*=========================
+        CARD
+==========================*/
+
+.tweet-card{
+
+    background:#e6ebf2;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    box-shadow:
+        18px 18px 36px #c7cbd2,
+        -18px -18px 36px #ffffff;
+
+    transition:.35s;
+}
+
+.tweet-card:hover{
+
+    transform:
+        translateY(-10px)
+        scale(1.02);
+
+    box-shadow:
+        24px 24px 45px #c2c6cc,
+        -24px -24px 45px #ffffff;
+}
+
+/*=========================
+        IMAGE
+==========================*/
+
+.tweet-img{
+
+    width:100%;
+
+    height:230px;
+
+    object-fit:cover;
+}
+
+/*=========================
+       CONTENT
+==========================*/
+
+.tweet-content{
+
+    padding:25px;
+}
+
+.tweet-content h4{
+
+    color:#50596b;
+
+    margin-bottom:15px;
+
+    font-weight:700;
+}
+
+.tweet-content p{
+
+    color:#6b7280;
+
+    line-height:1.7;
+
+    min-height:90px;
+}
+
+/*=========================
+        BUTTONS
+==========================*/
+
+.btn-group{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:30px;
+}
+
+.action-btn{
+
+    width:48%;
+
+    text-align:center;
+
+    padding:14px;
+
+    text-decoration:none;
+
+    border-radius:15px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    background:#e6ebf2;
+
+    box-shadow:
+        8px 8px 18px #c8ccd3,
+        -8px -8px 18px #ffffff;
+}
+
+.action-btn:hover{
+
+    transform:translateY(-3px);
+}
+
+.action-btn:active{
+
+    box-shadow:
+        inset 5px 5px 12px #c8ccd3,
+        inset -5px -5px 12px #ffffff;
+}
+
+.edit{
+
+    color:#2b6cff;
+}
+
+.delete{
+
+    color:#ff4e63;
+}
+</style>
+<div class="page-title">
+    <h1>🐦 Rayyan's Tweets</h1>
+    <p>Share your thoughts with the world.</p>
+</div>
+
+<div class="create-btn">
+    <a href="{% url 'tweet_create' %}" class="neo-btn">
+        ➕ Create Tweet
+    </a>
+</div>
+
+<div class="tweet-grid">
+{% for tweet in tweets %}
+
+<div class="tweet-card">
+
+    {% if tweet.photo %}
+        <img src="{{ tweet.photo.url }}" class="tweet-img">
+    {% endif %}
+
+    <div class="tweet-content">
+
+        <h4>{{ tweet.user.username }}</h4>
+
+        <p>{{ tweet.content }}</p>
+
+
+        {% if request.user == tweet.user %}
+        <div class="btn-group">
+
+            <a href="{% url 'tweet_edit' tweet.id %}" class="action-btn edit">
+                ✏ Edit
+            </a>
+
+            <a href="{% url 'tweet_delete' tweet.id %}" class="action-btn delete">
+                🗑 Delete
+            </a>
+
+        </div>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endfor %}
+</div>

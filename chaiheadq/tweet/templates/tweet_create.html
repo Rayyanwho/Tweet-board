@@ -1,0 +1,146 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+Create Tweet
+{% endblock %}
+
+{% block content %}
+
+<style>
+    body{
+        background:#e0e5ec;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .create-wrapper{
+        min-height:80vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .neo-card{
+        width:100%;
+        max-width:550px;
+        padding:40px;
+        border-radius:30px;
+        background:#e0e5ec;
+        box-shadow:
+            15px 15px 30px #bec3c9,
+            -15px -15px 30px #ffffff;
+    }
+
+    .neo-title{
+        text-align:center;
+        color:#444;
+        font-weight:700;
+        margin-bottom:30px;
+    }
+
+    .neo-card p{
+        margin-bottom:20px;
+    }
+
+    .neo-card label{
+        display:block;
+        margin-bottom:8px;
+        color:#555;
+        font-weight:600;
+    }
+
+    .neo-card input,
+    .neo-card textarea,
+    .neo-card select{
+        width:100%;
+        padding:14px 18px;
+        border:none;
+        outline:none;
+        border-radius:15px;
+        background:#e0e5ec;
+        box-shadow:
+            inset 6px 6px 12px #bec3c9,
+            inset -6px -6px 12px #ffffff;
+        transition:.3s;
+    }
+
+    .neo-card textarea{
+        min-height:140px;
+        resize:vertical;
+    }
+
+    .neo-card input:focus,
+    .neo-card textarea:focus,
+    .neo-card select:focus{
+        box-shadow:
+            inset 3px 3px 8px #bec3c9,
+            inset -3px -3px 8px #ffffff;
+    }
+
+    .neo-btn{
+        width:100%;
+        padding:14px;
+        margin-top:15px;
+        border:none;
+        border-radius:15px;
+        background:#e0e5ec;
+        color:#444;
+        font-size:16px;
+        font-weight:600;
+        cursor:pointer;
+        transition:.25s;
+        box-shadow:
+            8px 8px 16px #bec3c9,
+            -8px -8px 16px #ffffff;
+    }
+
+    .neo-btn:hover{
+        transform:translateY(-2px);
+    }
+
+    .neo-btn:active{
+        box-shadow:
+            inset 6px 6px 12px #bec3c9,
+            inset -6px -6px 12px #ffffff;
+    }
+
+    .back-btn{
+        display:inline-block;
+        margin-bottom:20px;
+        text-decoration:none;
+        color:#555;
+        font-weight:600;
+    }
+
+    .back-btn:hover{
+        color:#222;
+    }
+</style>
+
+<div class="container create-wrapper">
+
+    <div class="neo-card">
+
+        <a href="{% url 'tweet_list' %}" class="back-btn">
+            ← Back to Tweets
+        </a>
+
+        <h2 class="neo-title">
+            📝 Create a Tweet
+        </h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="neo-btn">
+                🚀 Publish Tweet
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
